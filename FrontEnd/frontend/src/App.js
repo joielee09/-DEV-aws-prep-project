@@ -1,28 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import { BrowserRouter , Route } from 'react-router-dom';
+import DetailPresenter from './components/Detail/DetailPresenter';
+import DetailContainer from './components/Detail/DetailContainer';
+import ListContainer from './components/List/ListContainer';
+import Header from './components/Modules/Header';
+
 function App () {
-  const [message, setMessage] = useState("");
-  
-  useEffect(() => {
-    fetch('/hello-string')
-      .then(response => response.text())
-      .then(message => {
-    setMessage(message);
-    });
-  },[]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"/>
-        <h1 className="App-title">{message}</h1>
-      </header>
-      <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
+    <BrowserRouter>
+    <Header />
+    <Route exact path='/' component={ListContainer}/>
+    <Route exact path='/getItem' component={DetailContainer} />
+    </BrowserRouter>
   )
 }
 export default App;
